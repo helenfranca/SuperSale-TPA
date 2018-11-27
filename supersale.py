@@ -38,6 +38,13 @@ def calculaCapacidadeFamilia(matriz_resultado, vet_capac_pessoa):
 
     return capacidade_familia
 
+def imprime(matriz_resultado):
+    linha = []
+    for i in range(0, qtd_pessoas):
+        print("", i, end=",")
+    print()
+    for linha in matriz_resultado:
+        print(linha)
 
 case = sys.argv[1] #Cases
 indice = 2
@@ -64,6 +71,8 @@ for caso in range(0,int(case)):
     
     matriz_resultado = []
     matriz_resultado =  montaMatriz(max(vet_capPessoa), vet_peso, [], vet_preco, 0)
+    print('\n Matriz')
+    imprime(matriz_resultado)
     print(calculaCapacidadeFamilia(matriz_resultado, vet_capPessoa))
 
 
