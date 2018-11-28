@@ -1,20 +1,20 @@
 import sys
 
-
-def montaMatriz(capacidade, vet_peso, vet_atual, vet_preco, degrau):
+def montaMatriz(matriz_resultado,capacidade, vet_peso, vet_atual, vet_preco, degrau):
     
+    #Preenche a primeira linha com zero
     for a in range(0, capacidade):
         vet_atual.append(0)
     matriz_resultado.append(vet_atual)
-
-    for k in sorted(vet_peso):
+    sorted(vet_peso)
+    for k in range(0,len(vet_peso)):
         vet_atual = []
         degrau += 1
+   
         for i in range(0, capacidade):
-            if (k <= i):
-                posPeso = vet_peso.index(k)
-                valorCorr = vet_preco[posPeso]
-                aux = i - k
+            if (vet_peso[k] <= i):
+                valorCorr = vet_preco[k]
+                aux = i - vet_peso[k]
                 valorSoma = valorCorr + matriz_resultado[degrau-1][aux]
                 if (valorSoma < matriz_resultado[degrau - 1][i]):
                     vet_atual.append(matriz_resultado[degrau - 1][i])
@@ -26,54 +26,47 @@ def montaMatriz(capacidade, vet_peso, vet_atual, vet_preco, degrau):
                 else:
                     vet_atual.append(0)
         matriz_resultado.append(vet_atual)
+        
     return matriz_resultado
 
 def calculaCapacidadeFamilia(matriz_resultado, vet_capac_pessoa):
     linha = []
     capacidade_familia = 0
     linha = matriz_resultado[len(matriz_resultado)-1]
-
+   
     for capacity in vet_capac_pessoa:
-        capacidade_familia += linha[capacity-1]
-
+        capacidade_familia += linha[capacity]
+        
     return capacidade_familia
 
-def imprime(matriz_resultado):
-    linha = []
-    for i in range(0, qtd_pessoas):
-        print("", i, end=",")
-    print()
-    for linha in matriz_resultado:
-        print(linha)
 
-case = sys.argv[1] #Cases
-indice = 2
-
-for caso in range(0,int(case)):
-    qtdItens = int(sys.argv[indice])
-    indice += 1
-    vet_peso = []
-    vet_preco = []
-    for item in range(0, int(qtdItens)):
-        vet_preco.append(int(sys.argv[indice + item]))
-        vet_peso.append(int(sys.argv[indice + item + 1]))
-        indice += 1
-
-    indice += 1
-    qtd_pessoas = int(sys.argv[indice + item])
-    indice += item
-    vet_capPessoa = []
-    for indPessoa in range(0, int(qtd_pessoas)):
-        vet_capPessoa.append(int(sys.argv[indice+1]))
-        indice += 1
-
-    indice += 1   
+def main():
+    var = []
+    case = int(input())
+     
+    for caso in range(0,case):
+        qtdItens = int(input())
+        vet_peso = []
+        vet_preco = []
+        for item in range(0, qtdItens):
+            pw = input().split(" ")
+            vet_preco.append(int(pw[0]))
+            vet_peso.append(int(pw[1]))
+            
+        qtd_pessoas = int(input())
+        vet_capPessoa = []
+        for indPessoa in range(0, qtd_pessoas):
+            vet_capPessoa.append(int(input()))
+                    
+        matriz_resultado = []
+        vet_atual = []
+       
+        montaMatriz(matriz_resultado, max(vet_capPessoa)+1, vet_peso, vet_atual, vet_preco, 0)
+        var.append(calculaCapacidadeFamilia(matriz_resultado, vet_capPessoa))
     
-    matriz_resultado = []
-    matriz_resultado =  montaMatriz(max(vet_capPessoa), vet_peso, [], vet_preco, 0)
-    print('\n Matriz')
-    imprime(matriz_resultado)
-    print(calculaCapacidadeFamilia(matriz_resultado, vet_capPessoa))
+    for a in var:
+        print(a)
+    print()
 
-
-
+if __name__ == '__main__':
+	main()
