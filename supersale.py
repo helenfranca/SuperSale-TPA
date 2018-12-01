@@ -1,4 +1,3 @@
-import sys
 
 def montaMatriz(matriz_resultado,capacidade, vet_peso, vet_atual, vet_preco, degrau):
     
@@ -62,11 +61,7 @@ def main():
         vet_atual = []
        
         montaMatriz(matriz_resultado, max(vet_capPessoa)+1, vet_peso, vet_atual, vet_preco, 0)
-        var.append(calculaCapacidadeFamilia(matriz_resultado, vet_capPessoa))
-    
-    for a in var:
-        print(a)
-    print()
+        print(calculaCapacidadeFamilia(matriz_resultado, vet_capPessoa))
 
 if __name__ == '__main__':
 	main()
