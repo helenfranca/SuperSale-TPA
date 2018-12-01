@@ -1,4 +1,3 @@
-
 def montaMatriz(matriz_resultado,capacidade, vet_peso, vet_atual, vet_preco, degrau):
     
     #Preenche a primeira linha com zero
